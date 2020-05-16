@@ -89,7 +89,12 @@ class App extends Component {
             return <option key={game.name}>{game.name}</option>;
           })}
         </select>
-        <button onClick={() => this.saveData()}>TestSave</button>
+        <button
+          disabled={!this.state.game?.name}
+          onClick={() => this.saveData()}
+        >
+          TestSave
+        </button>
       </div>
     );
   }
