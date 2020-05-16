@@ -15,7 +15,10 @@ class Timer extends Component {
   );
 
   updateTimer = () => {
-    this.setState({ currentTime: this.timer.currentTime });
+    this.setState({
+      currentTime: this.timer.currentTime,
+      timerState: this.timer.state,
+    });
   };
 
   render() {
@@ -23,12 +26,29 @@ class Timer extends Component {
       <div>
         <span>{this.state.currentTime}</span>
         <button
-          disabled={this.state.currentTime}
-          onClick={() => this.timer.start()}
+          disabled={this.state.timerState === 1 || this.state.timerState === 2}
+          onClick={() => this.timer.start(true)}
         >
           Start
         </button>
-        <button onClick={() => this.timer.stop()}>Stop</button>
+        <button
+          disabled={this.state.timerState === 0 && this.state.timerState !== 1}
+          onClick={() => this.timer.stop()}
+        >
+          Stop
+        </button>
+        <button
+          disabled={this.state.timerState !== 1 || this.state.timerState === 2}
+          onClick={() => this.timer.pause()}
+        >
+          Pause
+        </button>
+        <button
+          disabled={this.state.timerState !== 2 || this.state.timerState === 3}
+          onClick={() => this.timer.resume()}
+        >
+          Resume
+        </button>
       </div>
     );
   }
