@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Gamepad from "react-gamepad";
 import GameHeader from "../components/GameHeader";
+import Splits from "../components/Splits";
+import Timer from "../components/Timer";
 class App extends Component {
   state = {
     game: null,
@@ -94,6 +96,8 @@ class App extends Component {
         >
           TestSave
         </button>
+        <Splits />
+        <Timer />
       </div>
     );
   }
