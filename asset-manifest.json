@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Cross-Split/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/Cross-Split/static/js/main.695801a3.chunk.js",
+    "main.js.map": "/Cross-Split/static/js/main.695801a3.chunk.js.map",
+    "runtime-main.js": "/Cross-Split/static/js/runtime-main.0deb78d3.js",
+    "runtime-main.js.map": "/Cross-Split/static/js/runtime-main.0deb78d3.js.map",
+    "static/js/2.f8cc3cba.chunk.js": "/Cross-Split/static/js/2.f8cc3cba.chunk.js",
+    "static/js/2.f8cc3cba.chunk.js.map": "/Cross-Split/static/js/2.f8cc3cba.chunk.js.map",
+    "index.html": "/Cross-Split/index.html",
+    "precache-manifest.685b224fe26f60618f64e9a18ae6b5f0.js": "/Cross-Split/precache-manifest.685b224fe26f60618f64e9a18ae6b5f0.js",
+    "service-worker.js": "/Cross-Split/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/Cross-Split/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.f8cc3cba.chunk.js.LICENSE.txt": "/Cross-Split/static/js/2.f8cc3cba.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0deb78d3.js",
+    "static/js/2.f8cc3cba.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.695801a3.chunk.js"
+  ]
+}
