@@ -22,11 +22,12 @@ class App extends Component {
   buildSaveObject = () => {
     let saveObject = {
       profile: "test-profile",
-      games: this.state.currentProfile?.games
-        ? [...this.state.currentProfile?.games]
-        : [],
+      games: this.state.currentProfile?.games || [],
     };
-    if (!saveObject.games.find((game) => game.name === this.state.gameName)) {
+    saveObject.games = saveObject.games.filter(
+      (game) => game.name !== this.state.game.name
+    );
+    if (!saveObject.games.find((game) => game.name === this.state.game.name)) {
       saveObject.games.push(this.state.game);
     }
     return saveObject;
@@ -34,15 +35,12 @@ class App extends Component {
 
   saveData = () => {
     const saveObject = this.buildSaveObject();
-    console.log(saveObject);
     localStorage.setItem("profileSave", JSON.stringify(saveObject));
-    console.log("Game Saved " + this.state.game?.name);
-    this.loadData("test");
+    this.loadData(this.state.game.name);
   };
 
   loadData = (gameTitle) => {
     const loadedData = JSON.parse(localStorage.getItem("profileSave"));
-    console.log("Loaded Game " + gameTitle);
     this.setState(
       {
         currentProfile: loadedData,
@@ -63,9 +61,13 @@ class App extends Component {
       game: Object.assign({}, this.state.game, { name: value }),
     });
   };
+  changePlatform = (value) => {
+    this.setState({
+      game: Object.assign({}, this.state.game, { platform: value }),
+    });
+  };
 
   render() {
-    console.log(this.state);
     return (
       <div className="App">
         <Gamepad
@@ -78,6 +80,8 @@ class App extends Component {
         <span>Everything will go here.</span>
         <GameHeader
           changeTitle={this.changeTitle}
+          changePlatform={this.changePlatform}
+          gamePlatform={this.state.game?.platform || ""}
           gameName={this.state.game?.name || ""}
         />
         <select onChange={(e) => this.loadData(e.target.value)}>
