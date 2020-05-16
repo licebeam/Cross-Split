@@ -21,7 +21,6 @@ class App extends Component {
 
   buildSaveObject = () => {
     let saveObject = {
-      profile: "test-profile",
       games: this.state.currentProfile?.games || [],
     };
     saveObject.games = saveObject.games.filter(
