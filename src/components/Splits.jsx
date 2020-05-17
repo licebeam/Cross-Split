@@ -88,6 +88,7 @@ class Splits extends Component {
           {this.state.splits?.map((split, index) => {
             return (
               <Split
+                editMode={this.props.editMode}
                 globalTimerOn={this.props.globalTimerOn}
                 globalTimerPaused={this.props.globalTimerPaused}
                 isCurrentSplit={index === this.state.currentSplitIndex}
@@ -108,22 +109,26 @@ class Splits extends Component {
         >
           Next Split
         </button>
-        <button
-          disabled={
-            this.props.globalTimerOn ||
-            this.props.globalTimerPaused ||
-            !this.state.splits[0]?.previousTime
-          }
-          onClick={() => this.clearSplitTimes()}
-        >
-          Clear Times
-        </button>
-        <button
-          disabled={!this.props.game?.name}
-          onClick={() => this.props.updateCurrentGame(this.state.splits)}
-        >
-          Save Splits
-        </button>
+        {this.props.editMode ? (
+          <div>
+            <button
+              disabled={
+                this.props.globalTimerOn ||
+                this.props.globalTimerPaused ||
+                !this.state.splits[0]?.previousTime
+              }
+              onClick={() => this.clearSplitTimes()}
+            >
+              Clear Times
+            </button>
+            <button
+              disabled={!this.props.game?.name}
+              onClick={() => this.props.updateCurrentGame(this.state.splits)}
+            >
+              Save Splits
+            </button>
+          </div>
+        ) : null}
       </SplitsContainer>
     );
   }

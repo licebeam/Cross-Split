@@ -18,6 +18,8 @@ class App extends Component {
     //Split Time:
     splitStartPoint: 0,
     globalTime: 0,
+    //EditMode
+    editMode: true,
   };
   componentDidMount() {
     this.loadData("initial-game");
@@ -139,6 +141,11 @@ class App extends Component {
               return <option key={game.name}>{game.name}</option>;
             })}
           </select>
+          <button
+            onClick={() => this.setState({ editMode: !this.state.editMode })}
+          >
+            Edit Mode
+          </button>
         </TopBar>
         <GameHeader
           changeCategory={this.changeCategory}
@@ -149,6 +156,7 @@ class App extends Component {
           gameName={this.state.game?.name || ""}
         />
         <Splits
+          editMode={this.state.editMode}
           currentProfile={this.state.currentProfile}
           game={this.state.game}
           updateCurrentGame={this.updateCurrentGame}

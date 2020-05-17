@@ -6,13 +6,23 @@ const Split = styled.div`
   height: 40px;
   align-items: center;
   justify-content: center;
+  transition: 0.2s all;
+  background-color: ${(props) => (props.current ? "orange" : "grey")};
+  &:hover {
+    cursor: pointer;
+    background-color: blueviolet;
+  }
+  button {
+    &:hover {
+      background-color: pink;
+      color: black;
+    }
+  }
 `;
 class Timer extends Component {
   render() {
     return (
-      <Split>
-        {/* {this.props.isCurrentSplit ? <span>current</span> : <span></span>} */}
-
+      <Split current={this.props.isCurrentSplit}>
         <input
           placeholder="Split title"
           value={this.props.split?.name || ""}
@@ -25,15 +35,19 @@ class Timer extends Component {
           }
         />
         <h1>{this.props.split?.previousTime || "--"}</h1>
-        <button onClick={() => this.props.addSplit(this.props.index)}>
-          Add Split ^
-        </button>
-        <button onClick={() => this.props.addSplit(this.props.index + 1)}>
-          Add Split V
-        </button>
-        <button onClick={() => this.props.removeSplit(this.props.split)}>
-          delete
-        </button>
+        {this.props.editMode ? (
+          <div>
+            <button onClick={() => this.props.addSplit(this.props.index)}>
+              Add Split ^
+            </button>
+            <button onClick={() => this.props.addSplit(this.props.index + 1)}>
+              Add Split V
+            </button>
+            <button onClick={() => this.props.removeSplit(this.props.split)}>
+              delete
+            </button>
+          </div>
+        ) : null}
       </Split>
     );
   }
