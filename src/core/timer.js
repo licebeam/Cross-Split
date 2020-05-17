@@ -29,7 +29,13 @@ export default class TimeClass {
     }
     this.lastTimeFired = new Date();
     this.fires++;
-    this.currentTime = moment(this.count).utcOffset(0).format("HH:mm:ss.SS");
+    if (this.count > 3599999) {
+      this.currentTime = moment(this.count).utcOffset(0).format("HH:mm:ss.SS");
+    } else if (this.count > 59999) {
+      this.currentTime = moment(this.count).utcOffset(0).format("mm:ss.SS");
+    } else {
+      this.currentTime = moment(this.count).utcOffset(0).format("ss.SS");
+    }
     this.callback();
   }
 
