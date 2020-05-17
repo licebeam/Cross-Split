@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f28161b052d7beb19a7943abf11029b6",
+    "revision": "48a5c8407e09f0512c2964bd4f4f0c3f",
     "url": "/Cross-Split/index.html"
   },
   {
-    "revision": "6bfd1581e09e829841c4",
+    "revision": "e33aa336006c4798778a",
     "url": "/Cross-Split/static/css/main.d727808f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Cross-Split/static/js/2.629e59d9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6bfd1581e09e829841c4",
-    "url": "/Cross-Split/static/js/main.f290cf4f.chunk.js"
+    "revision": "e33aa336006c4798778a",
+    "url": "/Cross-Split/static/js/main.74d92b65.chunk.js"
   },
   {
     "revision": "15218538a3d7f5f353bf",

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Cross-Split/static/css/main.d727808f.chunk.css",
-    "main.js": "/Cross-Split/static/js/main.f290cf4f.chunk.js",
-    "main.js.map": "/Cross-Split/static/js/main.f290cf4f.chunk.js.map",
+    "main.js": "/Cross-Split/static/js/main.74d92b65.chunk.js",
+    "main.js.map": "/Cross-Split/static/js/main.74d92b65.chunk.js.map",
     "runtime-main.js": "/Cross-Split/static/js/runtime-main.0deb78d3.js",
     "runtime-main.js.map": "/Cross-Split/static/js/runtime-main.0deb78d3.js.map",
     "static/js/2.629e59d9.chunk.js": "/Cross-Split/static/js/2.629e59d9.chunk.js",
     "static/js/2.629e59d9.chunk.js.map": "/Cross-Split/static/js/2.629e59d9.chunk.js.map",
     "index.html": "/Cross-Split/index.html",
-    "precache-manifest.9076f7ffa55644d4baa1ebf51ddecc75.js": "/Cross-Split/precache-manifest.9076f7ffa55644d4baa1ebf51ddecc75.js",
+    "precache-manifest.980143ad1ec0055ec3548fa197535e08.js": "/Cross-Split/precache-manifest.980143ad1ec0055ec3548fa197535e08.js",
     "service-worker.js": "/Cross-Split/service-worker.js",
     "static/css/main.d727808f.chunk.css.map": "/Cross-Split/static/css/main.d727808f.chunk.css.map",
     "static/js/2.629e59d9.chunk.js.LICENSE.txt": "/Cross-Split/static/js/2.629e59d9.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0deb78d3.js",
     "static/js/2.629e59d9.chunk.js",
     "static/css/main.d727808f.chunk.css",
-    "static/js/main.f290cf4f.chunk.js"
+    "static/js/main.74d92b65.chunk.js"
   ]
 }
