@@ -1,9 +1,11 @@
+// I remembered seeing a neat timer class months ago on so I decided to use and modify it, found here:
+//https://stackoverflow.com/questions/24724852/pause-and-resume-setinterval
+
 import moment from "moment";
 export default class TimeClass {
   constructor(name, callback, interval, maxFires = null) {
     this.remaining = 0;
     this.state = 0; //  0 = idle, 1 = running, 2 = paused, 3= resumed
-
     this.name = name;
     this.interval = interval; //in ms
     this.callback = callback;
