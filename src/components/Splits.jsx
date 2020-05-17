@@ -10,14 +10,7 @@ class Splits extends Component {
     splits: [{ id: "cool first" }],
     currentSplitIndex: 0,
   };
-  updateSplitName = (value, id) => {
-    const newSplits = this.state.splits?.map((split) => {
-      if (split.id === id) {
-        return Object.assign({}, split, { name: value });
-      } else return split;
-    });
-    this.setState({ splits: newSplits });
-  };
+
   removeSplit = (selectedSplit) => {
     const newSplits = this.state.splits?.filter(
       (split) => split !== selectedSplit
@@ -34,15 +27,35 @@ class Splits extends Component {
     this.setState({ splits: newSplits });
   };
 
+  updateSplitValue = (value, id, key) => {
+    const newSplits = this.state.splits?.map((split) => {
+      if (split.id === id) {
+        return Object.assign({}, split, { [key]: value });
+      } else return split;
+    });
+    this.setState({ splits: newSplits });
+  };
+
   nextSplit = () => {
+    const lastSplit = this.state.splits[this.state.currentSplitIndex];
     if (this.state.currentSplitIndex >= this.state.splits?.length - 1) {
+      this.updateSplitValue(
+        this.props.globalTime,
+        lastSplit.id,
+        "previousTime"
+      );
       this.setState({ currentSplitIndex: 0 });
       //If you finish your splits, update the startpoint to 0ms
       this.props.stopTimers();
     } else
-      this.setState({
-        currentSplitIndex: this.state.currentSplitIndex + 1,
-      });
+      this.updateSplitValue(
+        this.props.globalTime,
+        lastSplit.id,
+        "previousTime"
+      );
+    this.setState({
+      currentSplitIndex: this.state.currentSplitIndex + 1,
+    });
   };
 
   render() {
@@ -57,7 +70,7 @@ class Splits extends Component {
                 isCurrentSplit={index === this.state.currentSplitIndex}
                 key={split.id}
                 index={index}
-                updateSplitName={this.updateSplitName}
+                updateSplitValue={this.updateSplitValue}
                 addSplit={this.addSplit}
                 removeSplit={this.removeSplit}
                 split={split}
