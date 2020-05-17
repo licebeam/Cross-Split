@@ -9,11 +9,7 @@ class Timer extends Component {
         <button onClick={() => this.props.addSplit(this.props.index)}>
           Add Split
         </button>
-        {!this.props.isCurrentSplit ? (
-          <span>{this.props.split?.previousTime}</span>
-        ) : (
-          <span>{this.props.globalTime || this.props.split?.previousTime}</span>
-        )}
+        <span>{this.props.split?.previousTime || "--"}</span>
         {this.props.split.title}
         <input
           onChange={(e) =>

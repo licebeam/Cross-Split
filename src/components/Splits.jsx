@@ -53,6 +53,13 @@ class Splits extends Component {
     this.updateSplitValue(this.props.globalTime, lastSplit.id, "previousTime");
   };
 
+  clearSplitTimes = () => {
+    const newSplits = this.state.splits?.map((split) => {
+      return Object.assign({}, split, { previousTime: null });
+    });
+    this.setState({ splits: newSplits });
+  };
+
   render() {
     return (
       <div>
@@ -79,6 +86,12 @@ class Splits extends Component {
           onClick={() => this.nextSplit()}
         >
           Next Split
+        </button>
+        <button
+          disabled={this.props.globalTimerOn || this.props.globalTimerPaused}
+          onClick={() => this.clearSplitTimes()}
+        >
+          Clear Times
         </button>
       </div>
     );
