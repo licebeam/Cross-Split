@@ -29,10 +29,12 @@ class Splits extends Component {
   };
 
   removeSplit = (selectedSplit) => {
-    const newSplits = this.state.splits?.filter(
-      (split) => split !== selectedSplit
-    );
-    this.setState({ splits: newSplits });
+    if (this.state?.splits?.length >= 2) {
+      const newSplits = this.state.splits?.filter(
+        (split) => split !== selectedSplit
+      );
+      this.setState({ splits: newSplits });
+    }
   };
 
   addSplit = (splitIndex) => {
