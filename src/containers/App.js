@@ -14,7 +14,7 @@ class App extends Component {
     globalTime: 0,
   };
   componentDidMount() {
-    this.loadData("test");
+    this.loadData("initial-game");
   }
   connectHandler(padindex) {
     console.log(`Gamepad ${padindex} connected !`);

@@ -78,7 +78,6 @@ class Splits extends Component {
       <div>
         <div>
           {this.state.splits?.map((split, index) => {
-            console.log(split);
             return (
               <Split
                 globalTimerOn={this.props.globalTimerOn}
