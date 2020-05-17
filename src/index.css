@@ -31,13 +31,6 @@ button:disabled {
   cursor: pointer;
 }
 
-input:disabled {
-  border-color: black;
-  background-color: dimgray;
-  color: black;
-  cursor: pointer;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

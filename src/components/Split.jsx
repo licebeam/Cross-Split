@@ -8,9 +8,15 @@ const Split = styled.div`
   justify-content: center;
   transition: 0.2s all;
   background-color: ${(props) => (props.current ? "orange" : "grey")};
+  input {
+    &:disabled {
+      background-color: ${(props) => (props.editMode ? "purple" : "orange")};
+      border: ${(props) => (props.editMode ? "none" : "grey")};
+      color: black;
+    }
+  }
   &:hover {
     cursor: pointer;
-    background-color: blueviolet;
   }
   button {
     &:hover {
@@ -22,8 +28,9 @@ const Split = styled.div`
 class Timer extends Component {
   render() {
     return (
-      <Split current={this.props.isCurrentSplit}>
+      <Split current={this.props.isCurrentSplit} editMode={this.props.editMode}>
         <input
+          disabled={!this.props.editMode}
           placeholder="Split title"
           value={this.props.split?.name || ""}
           onChange={(e) =>

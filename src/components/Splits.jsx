@@ -5,6 +5,11 @@ import styled from "styled-components";
 const SplitsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  .splits-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 Array.prototype.insert = function (index, item) {
   return this.splice(index, 0, item);
@@ -110,7 +115,7 @@ class Splits extends Component {
           Next Split
         </button>
         {this.props.editMode ? (
-          <div>
+          <div className="splits-buttons">
             <button
               disabled={
                 this.props.globalTimerOn ||
