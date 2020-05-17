@@ -101,7 +101,11 @@ class Splits extends Component {
           Next Split
         </button>
         <button
-          disabled={this.props.globalTimerOn || this.props.globalTimerPaused}
+          disabled={
+            this.props.globalTimerOn ||
+            this.props.globalTimerPaused ||
+            !this.state.splits[0]?.previousTime
+          }
           onClick={() => this.clearSplitTimes()}
         >
           Clear Times
