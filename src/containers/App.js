@@ -32,6 +32,7 @@ class App extends Component {
   toggleGlobalPause = () => {
     this.setState({ globalTimerPaused: !this.state.globalTimerPaused });
   };
+
   stopTimers = () => {
     this.setState({
       globalTimerOn: false,

@@ -5,6 +5,7 @@ class Timer extends Component {
   state = {
     currentTime: "",
     timerState: null,
+    lastKnownTime: null,
   };
 
   timer = new TimeClass(
@@ -21,7 +22,9 @@ class Timer extends Component {
       !this.props.globalTimerOn &&
       !this.props.globalTimerPaused
     ) {
-      this.timer.pause();
+      this.setState({ lastKnownTime: this.state.currentTime }, () => {
+        this.timer.stop();
+      });
     }
   }
 
@@ -40,7 +43,7 @@ class Timer extends Component {
   render() {
     return (
       <div>
-        <span>{this.state.currentTime}</span>
+        <span>{this.state.currentTime || this.state.lastKnownTime}</span>
         <button
           disabled={this.state.timerState === 1 || this.state.timerState === 2}
           onClick={() => {

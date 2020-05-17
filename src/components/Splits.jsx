@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Split from "./Split";
-
 Array.prototype.insert = function (index, item) {
   return this.splice(index, 0, item);
 };
-
 class Splits extends Component {
   state = {
     splits: [{ id: "cool first" }],
@@ -37,25 +35,22 @@ class Splits extends Component {
   };
 
   nextSplit = () => {
-    const lastSplit = this.state.splits[this.state.currentSplitIndex];
+    this.setPrevTime();
     if (this.state.currentSplitIndex >= this.state.splits?.length - 1) {
-      this.updateSplitValue(
-        this.props.globalTime,
-        lastSplit.id,
-        "previousTime"
-      );
-      this.setState({ currentSplitIndex: 0 });
-      //If you finish your splits, update the startpoint to 0ms
-      this.props.stopTimers();
-    } else
-      this.updateSplitValue(
-        this.props.globalTime,
-        lastSplit.id,
-        "previousTime"
-      );
-    this.setState({
-      currentSplitIndex: this.state.currentSplitIndex + 1,
-    });
+      this.setState({ currentSplitIndex: 0 }, () => {
+        //If you finish your splits, update the startpoint to 0ms
+        this.props.stopTimers();
+      });
+    } else if (this.state.currentSplitIndex <= this.state.splits?.length - 1) {
+      this.setState({
+        currentSplitIndex: this.state.currentSplitIndex + 1,
+      });
+    }
+  };
+
+  setPrevTime = () => {
+    const lastSplit = this.state.splits[this.state.currentSplitIndex];
+    this.updateSplitValue(this.props.globalTime, lastSplit.id, "previousTime");
   };
 
   render() {
