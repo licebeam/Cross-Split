@@ -2,6 +2,7 @@
 //https://stackoverflow.com/questions/24724852/pause-and-resume-setinterval
 
 import moment from "moment";
+
 export default class TimeClass {
   constructor(name, callback, interval, maxFires = null) {
     this.remaining = 0;
@@ -19,7 +20,7 @@ export default class TimeClass {
   }
 
   proxyCallback() {
-    //update out timer information
+    //update our timer information
     this.currentTimeStamp = moment();
     this.count = +this.currentTimeStamp - +this.startTimestamp;
     if (this.maxFires !== null && this.fires >= this.maxFires) {
@@ -35,11 +36,10 @@ export default class TimeClass {
   start(resetTime, startPoint) {
     if (resetTime) {
       this.startTimestamp = moment();
-      console.log("Starting Timer " + this.name);
     }
     if (startPoint) {
-      this.startTimestamp = moment(startPoint);
-      console.log("Continuing Timer " + this.name);
+      console.log(startPoint, "-=-=-=-=-= New Start Point", this.name);
+      this.startTimestamp = moment().add(startPoint, "milliseconds");
     }
     this.timerId = setInterval(() => this.proxyCallback(), this.interval);
     this.lastTimeFired = new Date();

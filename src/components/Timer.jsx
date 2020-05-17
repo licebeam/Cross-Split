@@ -26,10 +26,15 @@ class Timer extends Component {
   }
 
   updateTimer = () => {
-    this.setState({
-      currentTime: this.timer.currentTime,
-      timerState: this.timer.state,
-    });
+    this.setState(
+      {
+        currentTime: this.timer.currentTime,
+        timerState: this.timer.state,
+      },
+      () => {
+        this.props.updateGlobalTime(this.timer.currentTime);
+      }
+    );
   };
 
   render() {

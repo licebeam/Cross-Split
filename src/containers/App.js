@@ -11,6 +11,7 @@ class App extends Component {
     globalTimerPaused: false,
     //Split Time:
     splitStartPoint: 0,
+    globalTime: 0,
   };
   componentDidMount() {
     this.loadData("test");
@@ -38,9 +39,10 @@ class App extends Component {
     });
   };
 
-  //Update the split start point for accurate continuing of splits.
-  updateSplitStart = (currentTime) => {
-    this.setState({ splitStartPoint: currentTime });
+  updateGlobalTime = (value) => {
+    this.setState({
+      globalTime: value,
+    });
   };
 
   buildSaveObject = () => {
@@ -119,8 +121,7 @@ class App extends Component {
           TestSave
         </button>
         <Splits
-          splitStartPoint={this.state.splitStartPoint}
-          updateSplitStart={this.updateSplitStart}
+          globalTime={this.state.globalTime}
           stopTimers={this.stopTimers}
           toggleGlobalTimer={this.toggleGlobalTimer}
           toggleGlobalPause={this.toggleGlobalPause}
@@ -128,6 +129,7 @@ class App extends Component {
           globalTimerPaused={this.state.globalTimerPaused}
         />
         <Timer
+          updateGlobalTime={this.updateGlobalTime}
           toggleGlobalTimer={this.toggleGlobalTimer}
           toggleGlobalPause={this.toggleGlobalPause}
           globalTimerOn={this.state.globalTimerOn}

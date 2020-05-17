@@ -36,10 +36,8 @@ class Splits extends Component {
 
   nextSplit = () => {
     if (this.state.currentSplitIndex >= this.state.splits?.length - 1) {
-      console.log("should stop the timers");
       this.setState({ currentSplitIndex: 0 });
       //If you finish your splits, update the startpoint to 0ms
-      this.props.updateSplitStart(0);
       this.props.stopTimers();
     } else
       this.setState({
@@ -63,13 +61,17 @@ class Splits extends Component {
                 addSplit={this.addSplit}
                 removeSplit={this.removeSplit}
                 split={split}
-                splitStartPoint={this.props.splitStartPoint}
-                updateSplitStart={this.props.updateSplitStart}
+                globalTime={this.props.globalTime}
               />
             );
           })}
         </div>
-        <button onClick={() => this.nextSplit()}>Next Split</button>
+        <button
+          disabled={!this.props.globalTimerOn || this.props.globalTimerPaused}
+          onClick={() => this.nextSplit()}
+        >
+          Next Split
+        </button>
       </div>
     );
   }

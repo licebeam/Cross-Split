@@ -1,68 +1,41 @@
 import React, { Component } from "react";
 import TimeClass from "../core/timer";
-
+import moment from "moment";
+import { convertStringTime } from "../core/converter";
 class Timer extends Component {
   state = {
-    currentTime: "",
+    savedTimer: false,
     timerState: 0,
   };
-
-  //Currently the split timer is approximately .01 second off from global timer;
-  timer = new TimeClass(
-    `split-${this.props.split.id}`,
-    () => {
-      this.updateTimer();
-    },
-    10
-  );
 
   componentDidUpdate(prevProps) {
     //Check if split timer should activate
     if (
       this.props.globalTimerOn &&
-      this.props.isCurrentSplit &&
-      this.timer.state === 0
+      prevProps.isCurrentSplit &&
+      !this.props.isCurrentSplit
     ) {
-      this.props.updateSplitStart(this.state.currentTime);
-      this.props.index === 0
-        ? this.timer.start(true)
-        : this.timer.start(false, this.props.splitStartPoint);
-    }
-    //Check if split timer should deactivate
-    if (!this.props.globalTimerOn) {
-      this.timer.resume();
-      this.timer.stop();
-    }
-    //Check if split should pause or unpause
-    if (this.props.globalTimerOn && this.props.globalTimerPaused) {
-      this.timer.pause();
-    }
-    //Check if split should resume
-    if (
-      this.props.globalTimerOn &&
-      prevProps.globalTimerPaused &&
-      !this.props.globalTimerPaused
-    ) {
-      this.timer.resume();
+      this.saveTime();
     }
   }
 
-  updateTimer = () => {
-    this.setState({
-      currentTime: this.timer.currentTime,
-      timerState: this.timer.state,
-    });
+  saveTime = () => {
+    this.setState({ savedTimer: this.props.globalTime });
   };
 
   render() {
-    console.log(this.state);
     return (
       <div>
         {this.props.isCurrentSplit ? <span>current</span> : <span></span>}
         <button onClick={() => this.props.addSplit(this.props.index)}>
           Add Split
         </button>
-        <span>{this.state.currentTime || "time"}</span>
+        {this.props.isCurrentSplit ? (
+          <span>{this.state.savedTimer}</span>
+        ) : (
+          <span>{this.props.globalTime || "time"}</span>
+        )}
+
         {this.props.split.title}
         <input
           onChange={(e) =>
