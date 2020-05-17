@@ -5,8 +5,21 @@ Array.prototype.insert = function (index, item) {
 };
 class Splits extends Component {
   state = {
-    splits: [{ id: "cool first" }],
+    splits: [{ id: "init-split" }],
     currentSplitIndex: 0,
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentProfile !== this.props.currentProfile) {
+      this.cleanSplits();
+    }
+    if (prevProps.game !== this.props.game) {
+      this.cleanSplits();
+    }
+  }
+
+  cleanSplits = () => {
+    this.setState({ splits: this.props.splits, currentSplitIndex: 0 });
   };
 
   removeSplit = (selectedSplit) => {
@@ -65,6 +78,7 @@ class Splits extends Component {
       <div>
         <div>
           {this.state.splits?.map((split, index) => {
+            console.log(split);
             return (
               <Split
                 globalTimerOn={this.props.globalTimerOn}
@@ -92,6 +106,12 @@ class Splits extends Component {
           onClick={() => this.clearSplitTimes()}
         >
           Clear Times
+        </button>
+        <button
+          disabled={!this.props.game?.name}
+          onClick={() => this.props.updateCurrentGame(this.state.splits)}
+        >
+          Save Splits
         </button>
       </div>
     );

@@ -10,10 +10,10 @@ class Timer extends Component {
           Add Split
         </button>
         <span>{this.props.split?.previousTime || "--"}</span>
-        {this.props.split.title}
         <input
+          value={this.props.split?.name || ""}
           onChange={(e) =>
-            this.props.updateSplitName(
+            this.props.updateSplitValue(
               e.target.value,
               this.props.split.id,
               "name"

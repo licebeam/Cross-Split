@@ -66,17 +66,31 @@ class App extends Component {
   };
 
   loadData = (gameTitle) => {
+    console.log("loading - " + gameTitle);
     const loadedData = JSON.parse(localStorage.getItem("profileSave"));
     this.setState(
       {
         currentProfile: loadedData,
+        game: null,
       },
       () => {
+        console.log(loadedData);
         this.setState({
           game: this.state.currentProfile?.games?.find(
             (game) => game.name === gameTitle
           ),
         });
+      }
+    );
+  };
+
+  updateCurrentGame = (splits) => {
+    this.setState(
+      {
+        game: Object.assign({}, this.state.game, { splits }),
+      },
+      () => {
+        this.saveData();
       }
     );
   };
@@ -115,19 +129,17 @@ class App extends Component {
             return <option key={game.name}>{game.name}</option>;
           })}
         </select>
-        <button
-          disabled={!this.state.game?.name}
-          onClick={() => this.saveData()}
-        >
-          TestSave
-        </button>
         <Splits
+          currentProfile={this.state.currentProfile}
+          game={this.state.game}
+          updateCurrentGame={this.updateCurrentGame}
           globalTime={this.state.globalTime}
           stopTimers={this.stopTimers}
           toggleGlobalTimer={this.toggleGlobalTimer}
           toggleGlobalPause={this.toggleGlobalPause}
           globalTimerOn={this.state.globalTimerOn}
           globalTimerPaused={this.state.globalTimerPaused}
+          splits={this.state.game?.splits || [{ id: "init-split" }]}
         />
         <Timer
           updateGlobalTime={this.updateGlobalTime}
