@@ -32,10 +32,14 @@ export default class TimeClass {
     this.callback();
   }
 
-  start(resetTime) {
+  start(resetTime, startPoint) {
     if (resetTime) {
       this.startTimestamp = moment();
       console.log("Starting Timer " + this.name);
+    }
+    if (startPoint) {
+      this.startTimestamp = moment(startPoint);
+      console.log("Continuing Timer " + this.name);
     }
     this.timerId = setInterval(() => this.proxyCallback(), this.interval);
     this.lastTimeFired = new Date();

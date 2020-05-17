@@ -8,6 +8,7 @@ Array.prototype.insert = function (index, item) {
 class Splits extends Component {
   state = {
     splits: [{ id: "cool first" }],
+    currentSplitIndex: 0,
   };
   updateSplitName = (value, id) => {
     const newSplits = this.state.splits?.map((split) => {
@@ -33,24 +34,42 @@ class Splits extends Component {
     this.setState({ splits: newSplits });
   };
 
+  nextSplit = () => {
+    if (this.state.currentSplitIndex >= this.state.splits?.length - 1) {
+      console.log("should stop the timers");
+      this.setState({ currentSplitIndex: 0 });
+      //If you finish your splits, update the startpoint to 0ms
+      this.props.updateSplitStart(0);
+      this.props.stopTimers();
+    } else
+      this.setState({
+        currentSplitIndex: this.state.currentSplitIndex + 1,
+      });
+  };
+
   render() {
-    console.log(this.state);
     return (
       <div>
         <div>
           {this.state.splits?.map((split, index) => {
             return (
               <Split
+                globalTimerOn={this.props.globalTimerOn}
+                globalTimerPaused={this.props.globalTimerPaused}
+                isCurrentSplit={index === this.state.currentSplitIndex}
                 key={split.id}
                 index={index}
                 updateSplitName={this.updateSplitName}
                 addSplit={this.addSplit}
                 removeSplit={this.removeSplit}
                 split={split}
+                splitStartPoint={this.props.splitStartPoint}
+                updateSplitStart={this.props.updateSplitStart}
               />
             );
           })}
         </div>
+        <button onClick={() => this.nextSplit()}>Next Split</button>
       </div>
     );
   }

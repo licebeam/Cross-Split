@@ -7,6 +7,10 @@ class App extends Component {
   state = {
     game: null,
     currentProfile: null,
+    globalTimerOn: false,
+    globalTimerPaused: false,
+    //Split Time:
+    splitStartPoint: 0,
   };
   componentDidMount() {
     this.loadData("test");
@@ -20,6 +24,24 @@ class App extends Component {
   buttonChangeHandler(gamepadIndex) {
     console.log("button change" + gamepadIndex);
   }
+
+  toggleGlobalTimer = () => {
+    this.setState({ globalTimerOn: !this.state.globalTimerOn });
+  };
+  toggleGlobalPause = () => {
+    this.setState({ globalTimerPaused: !this.state.globalTimerPaused });
+  };
+  stopTimers = () => {
+    this.setState({
+      globalTimerOn: false,
+      globalTimerPaused: false,
+    });
+  };
+
+  //Update the split start point for accurate continuing of splits.
+  updateSplitStart = (currentTime) => {
+    this.setState({ splitStartPoint: currentTime });
+  };
 
   buildSaveObject = () => {
     let saveObject = {
@@ -96,8 +118,21 @@ class App extends Component {
         >
           TestSave
         </button>
-        <Splits />
-        <Timer />
+        <Splits
+          splitStartPoint={this.state.splitStartPoint}
+          updateSplitStart={this.updateSplitStart}
+          stopTimers={this.stopTimers}
+          toggleGlobalTimer={this.toggleGlobalTimer}
+          toggleGlobalPause={this.toggleGlobalPause}
+          globalTimerOn={this.state.globalTimerOn}
+          globalTimerPaused={this.state.globalTimerPaused}
+        />
+        <Timer
+          toggleGlobalTimer={this.toggleGlobalTimer}
+          toggleGlobalPause={this.toggleGlobalPause}
+          globalTimerOn={this.state.globalTimerOn}
+          globalTimerPaused={this.state.globalTimerPaused}
+        />
       </div>
     );
   }
