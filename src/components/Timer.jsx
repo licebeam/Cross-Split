@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import TimeClass from "../core/timer";
 
+import styled from "styled-components";
+
+const TimerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 class Timer extends Component {
   state = {
     currentTime: "",
@@ -42,8 +49,8 @@ class Timer extends Component {
 
   render() {
     return (
-      <div>
-        <span>{this.state.currentTime || this.state.lastKnownTime}</span>
+      <TimerContainer>
+        <h1>{this.state.currentTime || this.state.lastKnownTime}</h1>
         <button
           disabled={this.state.timerState === 1 || this.state.timerState === 2}
           onClick={() => {
@@ -88,7 +95,7 @@ class Timer extends Component {
         >
           Resume
         </button>
-      </div>
+      </TimerContainer>
     );
   }
 }

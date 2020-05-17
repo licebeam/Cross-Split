@@ -3,6 +3,12 @@ import Gamepad from "react-gamepad";
 import GameHeader from "../components/GameHeader";
 import Splits from "../components/Splits";
 import Timer from "../components/Timer";
+import styled from "styled-components";
+
+const TopBar = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 class App extends Component {
   state = {
     game: null,
@@ -106,6 +112,11 @@ class App extends Component {
       game: Object.assign({}, this.state.game, { platform: value }),
     });
   };
+  changeCategory = (value) => {
+    this.setState({
+      game: Object.assign({}, this.state.game, { category: value }),
+    });
+  };
 
   render() {
     return (
@@ -117,18 +128,26 @@ class App extends Component {
         >
           <></>
         </Gamepad>
-        <span>Everything will go here.</span>
+        <TopBar>
+          <select
+            placeholder="Select Game"
+            disabled={!this.state.currentProfile?.games?.length}
+            onChange={(e) => this.loadData(e.target.value)}
+          >
+            <option selected="selected">Select a Game</option>
+            {this.state.currentProfile?.games?.map((game) => {
+              return <option key={game.name}>{game.name}</option>;
+            })}
+          </select>
+        </TopBar>
         <GameHeader
+          changeCategory={this.changeCategory}
           changeTitle={this.changeTitle}
           changePlatform={this.changePlatform}
           gamePlatform={this.state.game?.platform || ""}
+          gameCategory={this.state.game?.category || ""}
           gameName={this.state.game?.name || ""}
         />
-        <select onChange={(e) => this.loadData(e.target.value)}>
-          {this.state.currentProfile?.games?.map((game) => {
-            return <option key={game.name}>{game.name}</option>;
-          })}
-        </select>
         <Splits
           currentProfile={this.state.currentProfile}
           game={this.state.game}

@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import Split from "./Split";
+import styled from "styled-components";
+
+const SplitsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 Array.prototype.insert = function (index, item) {
   return this.splice(index, 0, item);
 };
@@ -75,7 +81,7 @@ class Splits extends Component {
 
   render() {
     return (
-      <div>
+      <SplitsContainer>
         <div>
           {this.state.splits?.map((split, index) => {
             return (
@@ -116,7 +122,7 @@ class Splits extends Component {
         >
           Save Splits
         </button>
-      </div>
+      </SplitsContainer>
     );
   }
 }

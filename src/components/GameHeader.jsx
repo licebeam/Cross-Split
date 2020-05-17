@@ -1,17 +1,29 @@
 import React from "react";
+import styled from "styled-components";
 
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const GameHeader = (props) => {
   return (
-    <div>
+    <Header>
       <input
+        placeholder="Game"
         onChange={(e) => props.changeTitle(e.target.value)}
         value={props.gameName || ""}
       />
       <input
+        placeholder="Platform"
         onChange={(e) => props.changePlatform(e.target.value)}
         value={props.gamePlatform || ""}
       />
-    </div>
+      <input
+        placeholder="Category"
+        onChange={(e) => props.changeCategory(e.target.value)}
+        value={props.gameCategory || ""}
+      />
+    </Header>
   );
 };
 
